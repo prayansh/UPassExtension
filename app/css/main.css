@@ -1,0 +1,12 @@
+html {
+    width: 450px;
+    height: 400px;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+.hidden {
+    display: none;
+}

@@ -1,0 +1,30 @@
+{
+  "name": "UPassRenewExtension",
+  "appName": "upass_extension",
+  "version": "1.0.0",
+  "description": "Chrome Extension to renew your UPass",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "upass",
+    "renew",
+    "chrome",
+    "extension"
+  ],
+  "author": "prayansh",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-cleanhtml": "^1.0.3",
+    "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-minify": "^2.1.0",
+    "gulp-replace": "^0.6.1",
+    "gulp-strip-debug": "^1.1.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-zip": "^4.0.0",
+    "jshint": "^2.9.5"
+  }
+}
