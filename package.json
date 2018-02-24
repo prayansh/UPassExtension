@@ -1,7 +1,7 @@
 {
   "name": "UPassRenewExtension",
   "appName": "upass_extension",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Chrome Extension to renew your UPass",
   "scripts": {
     "test": "test"

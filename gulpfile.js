@@ -56,15 +56,40 @@ gulp.task('jshint', function () {
         .pipe(jshint.reporter('default'));
 });
 
-//copy vendor scripts and uglify all other scripts
-gulp.task('scripts', ['jshint'], function () {
+// //copy vendor scripts and uglify all other scripts
+// gulp.task('scripts', ['jshint'], function () {
+//     gulp.src('app/js/external/**/*.min.js')
+//         .pipe(gulp.dest('build/js/'));
+//     return gulp.src(['app/js/**/*.js', '!app/js/external/**/*.js'])
+//         // .pipe(stripdebug())
+//         .pipe(concat('app.js'))
+//         // .pipe(uglify())
+//         .pipe(gulp.dest('build/js'));
+// });
+
+gulp.task('optionsScript', ['jshint'], function () {
     gulp.src('app/js/external/**/*.min.js')
         .pipe(gulp.dest('build/js/'));
-    return gulp.src(['app/js/**/*.js', '!app/js/external/**/*.js'])
-        // .pipe(stripdebug())
-        .pipe(concat('app.js'))
-        .pipe(uglify())
+    return gulp.src(['app/js/common/*.js', 'app/js/options.js', '!app/js/external/**/*.js'])
+    // .pipe(stripdebug())
+        .pipe(concat('options.js'))
+        // .pipe(uglify())
         .pipe(gulp.dest('build/js'));
+});
+
+gulp.task('popupScript', ['jshint'], function () {
+    gulp.src('app/js/external/**/*.min.js')
+        .pipe(gulp.dest('build/js/'));
+    return gulp.src(['app/js/common/*.js', 'app/js/popup.js', '!app/js/external/**/*.js'])
+    // .pipe(stripdebug())
+        .pipe(concat('popup.js'))
+        // .pipe(uglify())
+        .pipe(gulp.dest('build/js'));
+});
+
+gulp.task('scripts', ['optionsScript', 'popupScript'], function () {
+    return gulp.src('app/js/external/**/*.min.js')
+        .pipe(gulp.dest('build/js/'));
 });
 
 gulp.task('build', ['copy', 'html', 'scripts', 'gen']);

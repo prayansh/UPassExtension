@@ -4,7 +4,9 @@
 var Utils = function () {
     return {
         setStorage: function (key, value, callback) {
-            chrome.storage.local.set({key: value}, function () {
+            var obj = {};
+            obj[key] = value;
+            chrome.storage.local.set(obj, function () {
                 if (callback)
                     callback();
             });

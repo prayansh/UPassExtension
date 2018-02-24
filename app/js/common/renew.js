@@ -17,10 +17,11 @@ var renewPass = function (_username, _password, school) {
         var responseCode = response.status;
         var data = response.data;
         if (responseCode === 202) {
-            updateMessage("UPass is renewing, jobId=" + data.jobId);
+            updateMessage("UPass is renewing, click button to refresh status");
             jobId = data.jobId;
             Utils.setStorage('jobId', jobId);
             $('#getStatus').prop('disabled', false);
+            $("#msg_chk").removeClass("hidden");
         } else if (responseCode === 208) {
             updateMessage("Job was already submitted, currently running");
         } else if (responseCode === 503) {
@@ -61,7 +62,7 @@ function getStatus() {
                     updateMessage("You are all set!");
                 } else if (status === "ERROR") {
                     updateMessage("Something went wrong here");
-                } else if (status === "RUNNING"){
+                } else if (status === "RUNNING") {
                     updateMessage("Job is still running");
                 }
 
@@ -74,54 +75,6 @@ function getStatus() {
         });
     } else {
         updateMessage("You haven't submitted a job");
-    }
-}
-
-$(document).ready(function () {
-    Utils.getStorage('username', function (username) {
-        Utils.getStorage('school', function (school) {
-            Utils.getStorage('password', function (password) {
-                if (username && school && password) {
-                    updateMessage("Renewing UPass....");
-                    renewPass(username, password, school);
-                }
-                else {
-                    $('#renew').click(function () {
-                        var _username = $('#username').val();
-                        var _password = $('#password').val();
-                        var school = $("#school").val();
-                        if (!_username || !_password || !school) {
-                            updateMessage("Enter your credentials");
-                            return;
-                        }
-                        if ($('#remember').is(':checked')) {
-                        }
-                        updateMessage("Renewing UPass....");
-                        var username = encrypt.encrypt(_username);
-                        var password = encrypt.encrypt(_password);
-                        Utils.setStorage('username', username);
-                        Utils.setStorage('password', password);
-                        Utils.setStorage('school', school);
-                        renewPass(username, password, school);
-                        hideUIElements(true)
-                    });
-                }
-            });
-        });
-    });
-    $('#getStatus').click(function () {
-        getStatus();
-    });
-});
-
-function hideUIElements(main) {
-    $("#main").removeClass("hidden");
-    $("#msg_chk").removeClass("hidden");
-    if (main) {
-        $("#main").addClass("hidden");
-    }
-    else {
-        $("#msg_chk").addClass("hidden");
     }
 }
 
